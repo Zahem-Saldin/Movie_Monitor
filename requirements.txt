@@ -1,0 +1,4 @@
+fastapi
+uvicorn
+motor
+prometheus_fastapi_instrumentator
