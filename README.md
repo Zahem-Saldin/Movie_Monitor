@@ -65,8 +65,6 @@ This project demonstrates:
 | `movie_seat_utilization{movie_id}` | Gauge | Seat utilization ratio |
 | `available_seats{movie_id,title}` | Gauge | Remaining seats |
 
-Metrics endpoint:
-
 ---
 
 ## 🔌 API Endpoints
@@ -86,15 +84,16 @@ Metrics endpoint:
 ## 🐳 Running the Project (Docker)
 
 ### 1️⃣ Clone the Repository
-```bash
-git clone https://github.com/Zahem-Saldin/Movie_Monitor.git
-cd Movie_Monitor
+
+  git clone https://github.com/Zahem-Saldin/Movie_Monitor.git
+  cd Movie_Monitor
+
 
 Configure Environment Variables
 
 Create backend/.env:
 
-MONGO_DETAILS=mongodb://mongo:27017
+  MONGO_DETAILS=mongodb://mongo:27017
 
 Start All Services
   docker-compose up --build
