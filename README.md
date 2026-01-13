@@ -2,6 +2,8 @@
 
 A **Dockerized Movie Booking System** built with **FastAPI**, **MongoDB**, and **React**, featuring **real-time monitoring using Prometheus and Grafana**.
 
+
+
 This project demonstrates:
 - RESTful API design with FastAPI
 - Async MongoDB access using Motor
@@ -97,7 +99,8 @@ Configure Environment Variables
 Create backend/.env:
 
   ```bash
-MONGO_DETAILS=mongodb://mongo:27017
+MONGO_DETAILS=mongodb+srv://zahem3:20626@cluster0.zkky4km.mongodb.net/Movies_Db?retryWrites=true&w=majority
+PORT=8000
 ```
 
 Start All Services
