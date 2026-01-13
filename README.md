@@ -2,7 +2,7 @@
 
 A **Dockerized Movie Booking System** built with **FastAPI**, **MongoDB**, and **React**, featuring **real-time monitoring using Prometheus and Grafana**.
 
-
+![Image](https://github.com/user-attachments/assets/106c11bd-c842-44af-b036-25d77f431d52)
 
 This project demonstrates:
 - RESTful API design with FastAPI
@@ -123,5 +123,12 @@ Service URLs
 Grafana default login
 
 Username: admin
-
 Password: admin
+
+Images
+
+![Image](https://github.com/user-attachments/assets/d1f5f49f-b9cc-42fe-b574-639278aea5e8)
+![Image](https://github.com/user-attachments/assets/d056676b-7969-4334-9523-6ca93b744ce8)
+![Image](https://github.com/user-attachments/assets/05b340cc-9ffd-4fa6-a866-8c93f4da0e2e)
+![Image](https://github.com/user-attachments/assets/a4ec1ef7-5b6d-4c3c-a493-73f173d544b3)
+![Image](https://github.com/user-attachments/assets/57abde88-4765-49cc-808a-faf697c89569)
