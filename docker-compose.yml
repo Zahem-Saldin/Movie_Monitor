@@ -1,20 +1,35 @@
-version: '3'
-
 services:
   movie-api:
-    build: .
+    build:
+      context: ./backend
+    container_name: movie-api
     ports:
       - "8000:8000"
+    env_file:
+      - ./backend/.env
     networks:
       - monitor-net
 
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        REACT_APP_API_URL: http://movie-api:8000
+    container_name: frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - movie-api
+    networks:
+      - monitor-net
+
+
   prometheus:
     image: prom/prometheus
+    container_name: prometheus
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
       - prometheus-data:/prometheus
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
     ports:
       - "9090:9090"
     networks:
@@ -22,8 +37,9 @@ services:
 
   grafana:
     image: grafana/grafana
+    container_name: grafana
     ports:
-      - "3000:3000"
+      - "3001:3000"
     volumes:
       - grafana-data:/var/lib/grafana
     networks:
@@ -36,6 +52,3 @@ networks:
 volumes:
   prometheus-data:
   grafana-data:
-
-
-

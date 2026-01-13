@@ -12,10 +12,11 @@ const App = () => {
   return (
     <Router>
       <div style={{ padding: 20 }}>
-        <h1 class="title">
-          <span class="movie">🎬 Movie</span>
-          <span class="base">Base</span>
-        </h1>
+        <h1 className="title">
+  <span className="movie">🎬 Movie</span>
+  <span className="base">Base</span>
+</h1>
+
         <nav style={{ marginBottom: 60 }}>
           <NavLink to="/" end className="nav-link">Home</NavLink> |{" "}
           <NavLink to="/add" className="nav-link">Add Movie</NavLink> |{" "}

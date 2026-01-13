@@ -2,14 +2,32 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../Dashboard.css";
 
+const API_BASE = window.location.hostname === "localhost"
+  ? "http://localhost:8000"
+  : "http://movie-api:8000";
+
+
 const MovieList = () => {
   const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get("http://localhost:8000/movies")
-      .then(res => setMovies(res.data))
-      .catch(err => console.error(err));
+    const fetchMovies = async () => {
+      try {
+        const res = await axios.get(`${API_BASE}/movies`);
+        setMovies(res.data);
+      } catch (err) {
+        console.error("Error fetching movies:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMovies();
   }, []);
+
+  if (loading) return <p>Loading movies...</p>;
+  if (movies.length === 0) return <p>No movies found.</p>;
 
   return (
     <div>

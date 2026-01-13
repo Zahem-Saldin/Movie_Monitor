@@ -1,23 +1,31 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+const API_BASE = window.location.hostname === "localhost"
+  ? "http://localhost:8000"
+  : "http://movie-api:8000";
+
 const CancelBooking = () => {
   const [bookingId, setBookingId] = useState("");
   const [bookings, setBookings] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // Fetch bookings and movies in parallel
         const [bookingsRes, moviesRes] = await Promise.all([
-          axios.get("http://localhost:8000/bookings"),
-          axios.get("http://localhost:8000/movies")
+          axios.get(`${API_BASE}/bookings`),
+          axios.get(`${API_BASE}/movies`)
         ]);
 
+        // Map movie IDs to titles
         const moviesMap = {};
         moviesRes.data.forEach(movie => {
-          moviesMap[movie.id] = movie.title; // Adjust key based on actual response
+          moviesMap[movie.id] = movie.title;
         });
 
+        // Merge movie names into bookings
         const bookingsWithNames = bookingsRes.data.map(booking => ({
           ...booking,
           movie_name: moviesMap[booking.movie_id] || "Unknown Movie"
@@ -26,6 +34,8 @@ const CancelBooking = () => {
         setBookings(bookingsWithNames);
       } catch (err) {
         console.error("Error fetching data:", err);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -38,10 +48,10 @@ const CancelBooking = () => {
       return;
     }
 
-    axios.delete(`http://localhost:8000/bookings/${bookingId}`)
+    axios.delete(`${API_BASE}/bookings/${bookingId}`)
       .then(() => {
-        alert("Booking cancelled");
-        // Remove the cancelled booking from the list
+        alert("Booking cancelled successfully");
+        // Remove cancelled booking from local state
         setBookings(prev => prev.filter(b => b.booking_id !== bookingId));
         setBookingId(""); // Reset selection
       })
@@ -51,12 +61,17 @@ const CancelBooking = () => {
       });
   };
 
+  if (loading) return <p>Loading bookings...</p>;
+  if (bookings.length === 0) return <p>No bookings to cancel.</p>;
+
   return (
     <div>
       <h2>Cancel Booking</h2>
-      <select id="booking_canc"
+      <select
+        id="booking_canc"
         value={bookingId}
         onChange={e => setBookingId(e.target.value)}
+        style={{ width: "100%", marginBottom: "10px" }}
       >
         <option value="">-- Select a booking --</option>
         {bookings.map(booking => (
@@ -65,7 +80,12 @@ const CancelBooking = () => {
           </option>
         ))}
       </select>
-      <button id="cancel" onClick={cancelBooking} disabled={!bookingId}>
+      <button
+        id="cancel"
+        onClick={cancelBooking}
+        disabled={!bookingId}
+        style={{ padding: "8px 16px" }}
+      >
         Cancel
       </button>
     </div>
