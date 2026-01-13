@@ -85,18 +85,27 @@ This project demonstrates:
 
 ### 1️⃣ Clone the Repository
 
-  git clone https://github.com/Zahem-Saldin/Movie_Monitor.git
-  cd Movie_Monitor
+  ```bash
+git clone https://github.com/Zahem-Saldin/Movie_Monitor.git
+```
+cd Movie_Monitor
+
 
 
 Configure Environment Variables
 
 Create backend/.env:
 
-  MONGO_DETAILS=mongodb://mongo:27017
+  ```bash
+MONGO_DETAILS=mongodb://mongo:27017
+```
 
 Start All Services
-  docker-compose up --build
+
+```bash
+docker-compose up --build
+```
+  
 
 Service URLs
 
@@ -109,5 +118,7 @@ Service URLs
 | Grafana      | [http://localhost:3001](http://localhost:3001)           |
 
 Grafana default login
+
 Username: admin
+
 Password: admin
