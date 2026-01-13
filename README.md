@@ -50,5 +50,65 @@ This project demonstrates:
 
 ---
 
-## 📂 Project Structure
 
+---
+
+## 📊 Prometheus Metrics Exposed
+
+| Metric Name | Type | Description |
+|------------|------|-------------|
+| `movie_added_total` | Gauge | Total movies in DB |
+| `booking_total{movie_id}` | Gauge | Successful bookings per movie |
+| `booking_failed_total{reason}` | Counter | Failed booking attempts |
+| `booking_cancel_total` | Counter | Canceled bookings |
+| `booking_seats_requested` | Histogram | Seats requested per booking |
+| `movie_seat_utilization{movie_id}` | Gauge | Seat utilization ratio |
+| `available_seats{movie_id,title}` | Gauge | Remaining seats |
+
+Metrics endpoint:
+
+---
+
+## 🔌 API Endpoints
+
+### Movies
+- `POST /movies` – Add a movie
+- `GET /movies` – List all movies
+- `GET /availability` – Check seat availability
+
+### Bookings
+- `POST /bookings` – Book tickets
+- `GET /bookings` – View all bookings
+- `DELETE /bookings/{booking_id}` – Cancel booking
+
+---
+
+## 🐳 Running the Project (Docker)
+
+### 1️⃣ Clone the Repository
+```bash
+git clone https://github.com/Zahem-Saldin/Movie_Monitor.git
+cd Movie_Monitor
+
+Configure Environment Variables
+
+Create backend/.env:
+
+MONGO_DETAILS=mongodb://mongo:27017
+
+Start All Services
+  docker-compose up --build
+
+Service URLs
+
+| Service      | URL                                                      |
+| ------------ | -------------------------------------------------------- |
+| Frontend     | [http://localhost:3000](http://localhost:3000)           |
+| Backend API  | [http://localhost:8000](http://localhost:8000)           |
+| FastAPI Docs | [http://localhost:8000/docs](http://localhost:8000/docs) |
+| Prometheus   | [http://localhost:9090](http://localhost:9090)           |
+| Grafana      | [http://localhost:3001](http://localhost:3001)           |
+
+Grafana default login
+Username: admin
+Password: admin
